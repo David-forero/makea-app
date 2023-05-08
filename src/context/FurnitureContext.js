@@ -1,28 +1,8 @@
-import {
-  useContext,
-  createContext,
-  ReactNode,
-  useState,
-  useCallback,
-  useEffect,
-} from "react";
+import { useContext, createContext, useState, useCallback, useEffect } from "react";
 import { get } from "../common/functions/http";
 
-interface IFurnitureContext {
-  furnitures: any;
-  getFurniture: any;
-  furniture: any;
-}
-
-interface IFornitureProviderProps {
-  children: ReactNode;
-}
-
-const FurnitureContext = createContext<IFurnitureContext>(
-  {} as IFurnitureContext
-);
-
-const FurnitureProvider = ({ children }: IFornitureProviderProps) => {
+const FurnitureContext = createContext({});
+const FurnitureProvider = ({ children }) => {
   const [furnitures, setFurnitures] = useState(null);
   const [furniture, setFurniture] = useState(null);
 
@@ -31,7 +11,7 @@ const FurnitureProvider = ({ children }: IFornitureProviderProps) => {
     setFurnitures(data.data);
   }, []);
 
-  const getFurniture = useCallback(async (id: string) => {
+  const getFurniture = useCallback(async (id) => {
     const { data } = await get(`/furnitures/${id}`);
     setFurniture(data.data);
   }, []);
@@ -48,6 +28,7 @@ const FurnitureProvider = ({ children }: IFornitureProviderProps) => {
         furniture,
         /*🔻  Funciones 🔻*/
         getFurniture,
+        getFurnitures
       }}
     >
       {children}

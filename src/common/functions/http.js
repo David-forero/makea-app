@@ -1,40 +1,86 @@
-import { useContext, createContext, useState, useCallback, useEffect } from "react";
-import { get } from "../common/functions/http";
+import Axios from "../../config/axiosConfig";
+import {ERROR_UNKNOWN} from '../constants/messages';
 
-const FurnitureContext = createContext({});
-const FurnitureProvider = ({ children }) => {
-  const [furnitures, setFurnitures] = useState(null);
-  const [furniture, setFurniture] = useState(null);
+const get = async (url) => { 
+    try {
+        return await Axios.get(url);
 
-  const getFurnitures = useCallback(async () => {
-    const { data } = await get("/furnitures");
-    setFurnitures(data.data);
-  }, []);
+    } catch (error) {
+        console.error( '❌ Error ->',error);
+        if (error.response.data.status) {
+            return {data: {
+                status: error.response.data.status, message: error.response.data.message, data: false
+            }}
+        }
+        return {data: {status: 500, message: ERROR_UNKNOWN, data: false}}
+    }
+}
 
-  const getFurniture = useCallback(async (id) => {
-    const { data } = await get(`/furnitures/${id}`);
-    setFurniture(data.data);
-  }, []);
+const post = async (url, data) =>{
+    try {
+        return await Axios.post(url, data);
 
-  useEffect(() => {
-    getFurnitures();
-  }, []);
+    } catch (error) {
+        console.error( '❌ Error ->',error);
+        if (error.response.data.status) {
+            return {data: {
+                status: error.response.data.status, message: error.response.data.message, data: false
+            }}
+        }
+        return {data: {status: 500, message: ERROR_UNKNOWN, data: false}}
+    }
+}
 
-  return (
-    <FurnitureContext.Provider
-      value={{
-        /*🔻  Variables 🔻*/
-        furnitures,
-        furniture,
-        /*🔻  Funciones 🔻*/
-        getFurniture,
-      }}
-    >
-      {children}
-    </FurnitureContext.Provider>
-  );
-};
+const put = async (url, data) =>{
+    try {
+        return await Axios.get(url, data);
 
-export default FurnitureProvider;
+    } catch (error) {
+        console.error( '❌ Error ->',error);
+        if (error.response.data.status) {
+            return {data: {
+                status: error.response.data.status, message: error.response.data.message, data: false
+            }}
+        }
+        return {data: {status: 500, message: ERROR_UNKNOWN, data: false}}
+    }
+}
 
-export const useFurnitureContext = () => useContext(FurnitureContext);
+const patch = async (url, data) =>{
+    try {
+        return await Axios.patch(url, data);
+
+    } catch (error) {
+        console.error( '❌ Error ->',error);
+        if (error.response.data.status) {
+            return {data: {
+                status: error.response.data.status, message: error.response.data.message, data: false
+            }}
+        }
+        return {data: {status: 500, message: ERROR_UNKNOWN, data: false}}
+    }
+}
+
+const delet = async (url, data) =>{
+    try {
+        return await Axios.delete(url, data);
+
+    } catch (error) {
+        console.error( '❌ Error ->',error);
+        if (error.response.data.status) {
+            return {data: {
+                status: error.response.data.status, message: error.response.data.message, data: false
+            }}
+        }
+        return {data: {status: 500, message: ERROR_UNKNOWN, data: false}}
+    }
+}
+
+
+export {
+    get,
+    post,
+    put,
+    patch,
+    delet
+}
