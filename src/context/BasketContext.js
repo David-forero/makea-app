@@ -1,12 +1,13 @@
 import { useContext, createContext, useState, useCallback, useEffect } from "react";
 
-const BasketContext = createContext({});
+const BasketContext = createContext();
 
 const BasketProvider = ({ children }) => {
   const [total, setTotal] = useState(0);
   const [items, setItems] = useState([]);
 
   const addToBasket = useCallback((item) => {
+    console.log(item);
     setItems([...items, item]);
   }, [items]);
 
