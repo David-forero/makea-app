@@ -7,7 +7,6 @@ const BasketProvider = ({ children }) => {
   const [items, setItems] = useState([]);
 
   const addToBasket = useCallback((item) => {
-    console.log(item);
     setItems([...items, item]);
   }, [items]);
 
