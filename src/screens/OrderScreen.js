@@ -1,7 +1,8 @@
-import { Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { useAuthContext } from '../context/AuthContext';
 import { useOrderContext } from '../context/OrderContext';
+import { Order } from './components';
 
 const OrderScreen = () => {
   const {orders, getOrders} = useOrderContext();
@@ -26,11 +27,11 @@ const OrderScreen = () => {
               )
             }
 
-            <View className="mt-5 space-y-4">
+            <ScrollView className="mt-5 space-y-4">
               {orders && orders?.map(({id, amount, amountShipping, updatedAt, images}, i) => (
                 <Order id={id} key={i} amount={amount} amountShipping={amountShipping} updatedAt={updatedAt} images={images} />
               ))}
-            </View>
+            </ScrollView>
     </View>
   )
 }

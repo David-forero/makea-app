@@ -10,7 +10,7 @@ import { useAuthContext } from '../context/AuthContext';
 const BasketScreen = () => {
   const { items, total } = useBasketContext();
   const { createOrder } = useOrderContext();
-  const { auth } = useAuthContext();
+  const { user, auth } = useAuthContext();
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
@@ -31,7 +31,7 @@ const BasketScreen = () => {
             disabled={loading}
             onPress={() => {
               setLoading(true);
-              createOrder(items, 'david.forero1813@gmail.com', navigation, setLoading)
+              createOrder(items, user.email, navigation, setLoading)
             }}
             style={styles.button}>
             <Text style={styles.buttonText}>

@@ -34,6 +34,7 @@ const BasketProvider = ({ children }) => {
       value={{
         total,
         items,
+        setItems,
         addToBasket,
         removeFromBasket,
       }}

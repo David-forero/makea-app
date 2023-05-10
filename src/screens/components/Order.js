@@ -1,10 +1,17 @@
 import { Text, View, Image } from 'react-native'
 import React from 'react'
+import { currencyFormat } from '../../common/functions/format-currency'
+import moment from 'moment'
 
-const Order = () => {
+const Order = ({ id,
+  amount,
+  amountShipping,
+  updatedAt,
+  images,}) => {
+  console.log();
   return (
-    <View className="relative border rounded-md">
-    <View className="flex items-center space-x-10 p-5 bg-gray-100 text-sm text-gray-800">
+    <View className="relative border rounded-md mt-5">
+    <View className="flex-row items-center space-x-10 p-5 bg-gray-100 text-sm text-gray-800">
       <View>
         <Text className="font-bold text-xs">Orden</Text>
         <Text>{moment(updatedAt).format("DD MMM YYYY")}</Text>
@@ -27,14 +34,14 @@ const Order = () => {
       </Text>
     </View>
 
-    <View className="p-5 sm:p-10">
-      <View className="flex space-x-6 overflow-x-auto">
+    <View className="p-5 ">
+      <View className="flex-row space-x-6 overflow-x-auto">
         {images?.map((image, i) => (
           <Image
-            soruce={{uri: image}}
+            source={{uri: image}}
             alt="items"
             key={i}
-            className="h-20 object-contain sm:h-32"
+            className="h-20 w-20 "
           />
         ))}
       </View>

@@ -25,10 +25,10 @@ const App = () => {
             <BasketContextProvider>
               <OrderContextProvider>
                 {/* <RootNavigator /> */}
-                <Stack.Navigator  screenOptions={{ headerShown: false }}>
+                <Stack.Navigator initialRouteName='HomeScreen' screenOptions={{ headerShown: false }}>
+                  <Stack.Screen name="HomeScreen" component={HomeScreen} />
                   <Stack.Screen name="OrderScreen" component={OrderScreen} />
                   <Stack.Screen name="AuthScreen" component={AuthScreen} /> 
-                  <Stack.Screen name="HomeScreen" component={HomeScreen} />
                   <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
                   <Stack.Screen name="BasketScreen" component={BasketScreen} />
                 </Stack.Navigator>
