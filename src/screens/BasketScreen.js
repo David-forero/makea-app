@@ -1,18 +1,22 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import { useState } from 'react';
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import { BasketItem } from './components';
 import { useBasketContext } from '../context/BasketContext';
-import { useStripe } from '@stripe/stripe-react-native';
 import { useOrderContext } from '../context/OrderContext';
+import { useAuthContext } from '../context/AuthContext';
 
 
 const BasketScreen = () => {
   const { items, total } = useBasketContext();
   const { createOrder } = useOrderContext();
+  const { auth } = useAuthContext();
+  const [loading, setLoading] = useState(false);
 
+  const navigation = useNavigation();
 
   return (
- <View style={styles.page}>
+    <View style={styles.page}>
       <Text style={{ fontWeight: "bold", marginVertical: 20 }}>Tu Cesta</Text>
 
       <FlatList
@@ -21,13 +25,31 @@ const BasketScreen = () => {
       />
 
       <View style={styles.separator} />
-      <Pressable
-        onPress={() => createOrder(items)} 
-        style={styles.button}>
-        <Text style={styles.buttonText}>
-          Crear pedido ${total}
-        </Text>
-      </Pressable>
+      {
+        auth ? (
+          <Pressable
+            disabled={loading}
+            onPress={() => {
+              setLoading(true);
+              createOrder(items, 'david.forero1813@gmail.com', navigation, setLoading)
+            }}
+            style={styles.button}>
+            <Text style={styles.buttonText}>
+              {loading ? <ActivityIndicator color={'#fff'} /> : `Crear pedido ${total}`}
+            </Text>
+          </Pressable>
+        ) : (
+          <Pressable
+            onPress={() => {
+              navigation.navigate('AuthScreen')
+            }}
+            style={styles.button}>
+            <Text style={styles.buttonText}>
+              Iniciar sessión
+            </Text>
+          </Pressable>
+        )
+      }
     </View>
 
   )

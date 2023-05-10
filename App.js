@@ -2,7 +2,7 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { BasketScreen, DetailsScreen, HomeScreen } from './src/screens';
+import { AuthScreen, BasketScreen, DetailsScreen, HomeScreen, OrderScreen } from './src/screens';
 import 'react-native-safe-area-context'
 
 //Context
@@ -25,7 +25,9 @@ const App = () => {
             <BasketContextProvider>
               <OrderContextProvider>
                 {/* <RootNavigator /> */}
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Navigator  screenOptions={{ headerShown: false }}>
+                  <Stack.Screen name="OrderScreen" component={OrderScreen} />
+                  <Stack.Screen name="AuthScreen" component={AuthScreen} /> 
                   <Stack.Screen name="HomeScreen" component={HomeScreen} />
                   <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
                   <Stack.Screen name="BasketScreen" component={BasketScreen} />
