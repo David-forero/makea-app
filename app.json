@@ -6,10 +6,13 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "extra": {
-      "STRIPE_SIGNING_SECRET":"whsec_fCdWRiLJmrG3TIJf0h9ELBtiAPdnDAFj",
+      "STRIPE_SIGNING_SECRET": "whsec_fCdWRiLJmrG3TIJf0h9ELBtiAPdnDAFj",
       "STRIPE_SECRET_KEY": "sk_test_51Mv6VHIfOreT1iriuiyl9ezB5TTS0I69zUMsnemPqiMEXR7B26PLWcBBZLEFNtkgRt3garma8ykEe7QHFObQO2y300JUrSbe4Q",
       "STRIPE_PUBLIC_KEY": "pk_test_51Mv6VHIfOreT1iriQicUaa305lWrK9cdqrKeEIdpE00Zjf64uRMskaCsBgafm8KJrgfZLi3r3KrnyjI0oG1mShus003w2cZbvh",
-      "BACKEND": "http://10.0.2.2:3000"
+      "BACKEND": "http://10.0.2.2:3000",
+      "eas": {
+        "projectId": "71387a03-18a1-4002-b3f6-b58abfdba00a"
+      }
     },
     "userInterfaceStyle": "light",
     "splash": {
@@ -17,7 +20,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -25,7 +30,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.daele.makea_app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
